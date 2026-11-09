@@ -56,6 +56,7 @@ import posthogHelper from '@/modules/common/helpers/posthogHelper';
 const { iconList, defaultIcon } = configs;
 import { PermissionDeniedModal } from './PermissionDeniedModal/PermissionDeniedModal';
 import { canEditModule } from '@/modules/Modules/helpers/modulePermissions';
+import CreateModuleWithPrompt from '@/modules/AiBuilder/components/CreateModuleWithPrompt';
 import { updateCurrentSession } from '@/_helpers/authorizeWorkspace';
 
 const MAX_APPS_PER_PAGE = 9;
@@ -1893,6 +1894,8 @@ class HomePageComponent extends React.Component {
                 ) : (
                   !appSearchKey && <HeaderSkeleton />
                 )}
+
+                {this.props.appType === 'module' && this.canCreateApp() && <CreateModuleWithPrompt />}
 
                 {(meta?.total_count > 0 || appSearchKey) && (
                   <>
